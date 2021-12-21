@@ -28,6 +28,8 @@ public class App extends Application{
     private static Button gameb;
     private static Label Result;
     private static ImageView Dice;
+    private static ImageView arrow1;
+    private static ImageView arrow2;
 
     private static boolean turnP1 = false;
     private static boolean turnP2 = false;
@@ -70,6 +72,20 @@ public class App extends Application{
                 tileG.getChildren().add(slot);
             }
         }
+
+        arrow1 = new ImageView("arrow.gif");
+        arrow1.setFitWidth(40);
+        arrow1.setFitHeight(40);
+        arrow1.setTranslateX(620);
+        arrow1.setTranslateY(25);
+        arrow1.setVisible(false);
+
+        arrow2 = new ImageView("arrow.gif");
+        arrow2.setFitWidth(40);
+        arrow2.setFitHeight(40);
+        arrow2.setTranslateX(760);
+        arrow2.setTranslateY(25);
+        arrow2.setVisible(false);
 
         Rectangle P1 = new Rectangle(30, 30, Color.RED);
         P1.setId("Player 1");
@@ -115,6 +131,8 @@ public class App extends Application{
             public void handle(ActionEvent event){
                 gameb.setText("Game has been started");
                 start = true;
+                arrow1.setVisible(true);
+                arrow2.setVisible(true);
             }
         });
 
@@ -149,6 +167,8 @@ public class App extends Application{
                 Position2text.setText("Player 2 Position : "+String.valueOf(P2onboard));
 
                 start = false;
+                arrow1.setVisible(false);
+                arrow2.setVisible(false);
                 Result.setText("Dice value : 0");
             }
         });
@@ -159,6 +179,8 @@ public class App extends Application{
         button1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
+                arrow1.setVisible(false);
+                arrow2.setVisible(true);
                 if(start){
                     getRandom();
                     showdice();
@@ -219,6 +241,8 @@ public class App extends Application{
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
+                arrow2.setVisible(false);
+                arrow1.setVisible(true);
                 if(start){
                     getRandom();
                     showdice();
@@ -286,19 +310,19 @@ public class App extends Application{
         Dice.setTranslateX(700);
         Dice.setTranslateY(300);
 
-        tileG.getChildren().addAll(bgimg,gameb,stop,StartText,stopText,Dice,P1,P1Demo,P2,P2Demo,button1,button2,Result,Position1text,Position2text);
+        tileG.getChildren().addAll(bgimg,gameb,stop,StartText,stopText,Dice,P1,P1Demo,P2,P2Demo,button1,button2,arrow1,arrow2,Result,Position1text,Position2text);
         return root;
     }
 
     private static void showdice(){
         Image img;
-        for(int i = 0 ; i<15 ; i++){
-            img = new Image("dice"+(int)(Math.random()*6+1)+".png");
-            Dice = new ImageView();
-            Dice.setImage(img);
-            Dice.setFitHeight(90);
-            Dice.setFitWidth(90);
-        }
+        // for(int i = 0 ; i<15 ; i++){
+        //     img = new Image("dice"+(int)(Math.random()*6+1)+".png");
+        //     Dice = new ImageView();
+        //     Dice.setImage(img);
+        //     Dice.setFitHeight(90);
+        //     Dice.setFitWidth(90);
+        // }
         img = new Image("dice"+random+".png");
         Dice = new ImageView();
         Dice.setImage(img);
@@ -327,7 +351,6 @@ public class App extends Application{
         animate.setAutoReverse(false);
         animate.play();
     }
-
 
     private static void P1move(Rectangle P1){
         for(int i = 0; i<random ; i++){
