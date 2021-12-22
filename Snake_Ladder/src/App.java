@@ -1,9 +1,7 @@
-import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,27 +20,29 @@ public class App extends Application{
     private static final int ladder[] = {2,7,8,15,21,28,36,51,78,71,87};
     private static final int snake[]  = {16,46,49,64,74,92,95,99,62};
 
-    private static Group tileG = new Group();
+    public static Group tileG = new Group();
+    // private static Stage secondarystage;
 
-    private static int random;
-    private static Button gameb;
-    private static Label Result;
+    public static int random;
+    public static Button gameb;
+    public static Label Result;
     private static ImageView Dice;
-    private static ImageView arrow1;
-    private static ImageView arrow2;
+    public static ImageView arrow1;
+    public static ImageView arrow2;
 
     private static boolean turnP1 = false;
     private static boolean turnP2 = false;
-    private static boolean start = false;
+    public static boolean start = false;
+    // public static boolean win = false;
 
-    private static int P1posX = 670;
-    private static int P1posY = 60;
+    public static int P1posX = 670;
+    public static int P1posY = 60;
 
-    private static int P2posX = 810;
-    private static int P2posY = 60;
+    public static int P2posX = 810;
+    public static int P2posY = 60;
 
-    private static int P1pos;
-    private static int P2pos;
+    public static int P1pos;
+    public static int P2pos;
 
     private static int P1onboard;
     private static int P2onboard;
@@ -57,7 +57,44 @@ public class App extends Application{
         primarystage.setTitle("Snake and Ladder");
         primarystage.setScene(scene);
         primarystage.show();
+
+        // if(win){
+        //     Scene scene2 = new Scene(End());
+        //     secondarystage.setTitle("Victory");
+        //     secondarystage.setScene(scene2);
+        //     secondarystage.show();
+        // }
     }
+
+    // private static Parent End(){
+    //     Pane root = new Pane();
+    //     root.setPrefSize(300,300);
+        
+    //     if(P1onboard==100){
+    //         Label label = new Label("Player 1 won!!");
+    //         label.setTranslateX(100);
+    //         label.setTranslateY(150);
+    //         root.getChildren().add(label);
+    //     }
+    //     if(P2onboard==100){
+    //         Label label = new Label("Player 2 won!!");
+    //         label.setTranslateX(100);
+    //         label.setTranslateY(150);
+    //         root.getChildren().add(label);
+    //     }
+
+    //     return root;
+    // }
+
+    // public static boolean checkWin(){
+    //     if(P1onboard==100){
+    //         return true;
+    //     }
+    //     if(P2onboard==100){
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     private static Parent Game(){
         Pane root = new Pane();
@@ -179,9 +216,9 @@ public class App extends Application{
         button1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
-                arrow1.setVisible(false);
-                arrow2.setVisible(true);
                 if(start){
+                    arrow1.setVisible(false);
+                    arrow2.setVisible(true);
                     getRandom();
                     showdice();
                     Result.setText("Dice value : "+String.valueOf(random));
@@ -198,7 +235,8 @@ public class App extends Application{
                     }
                     else if((turnP1 || !turnP2) && P1onboard>=1){
                         P1onboard = addposition(P1onboard);
-                        P1move(P1);
+                        Move move = new Move(P1,1);
+                        move.run();
                         Position2text.setText("Player 2 Position : "+String.valueOf(P2onboard));
                         boolean checkLadder = false;
                         boolean checkSnake = false;
@@ -211,7 +249,8 @@ public class App extends Application{
                         if(checkLadder){
                             Paths pm = new Paths(P1);
                             P1onboard =  pm.move(P1onboard);
-                            transportP1(P1onboard);
+                            Transport transport = new Transport(1, P1onboard);
+                            transport.run();
                         }
     
                         for(int i = 0 ; i<9 ; i++){
@@ -223,7 +262,8 @@ public class App extends Application{
                         if(checkSnake){
                             Paths pm = new Paths(P1);
                             P1onboard = pm.move(P1onboard);
-                            transportP1(P1onboard);
+                            Transport transport = new Transport(1, P1onboard);
+                            transport.run();
                         }
                         Position1text.setText("Player 1 Position : "+String.valueOf(P1onboard));
                         turnP1 = false;
@@ -241,9 +281,9 @@ public class App extends Application{
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
-                arrow2.setVisible(false);
-                arrow1.setVisible(true);
                 if(start){
+                    arrow2.setVisible(false);
+                    arrow1.setVisible(true);
                     getRandom();
                     showdice();
                     Result.setText("Dice value : "+String.valueOf(random));
@@ -260,7 +300,8 @@ public class App extends Application{
                     }
                     else if((turnP2 || !turnP1) && P2onboard>=1){
                         P2onboard = addposition(P2onboard);
-                        P2move(P2);
+                        Move move = new Move(P2, 2);
+                        move.run();
                         Position2text.setText("Player 2 Position : "+String.valueOf(P2onboard));
                         boolean checkLadder = false;
                         boolean checkSnake = false;
@@ -273,7 +314,8 @@ public class App extends Application{
                         if(checkLadder){
                             Paths pm = new Paths(P2);
                             P2onboard =  pm.move(P2onboard);
-                            transportP2(P2onboard);
+                            Transport transport = new Transport(2, P2onboard);
+                            transport.run(); 
                         }
     
                         for(int i = 0 ; i<9 ; i++){
@@ -285,7 +327,8 @@ public class App extends Application{
                         if(checkSnake){
                             Paths pm = new Paths(P2);
                             P2onboard = pm.move(P2onboard);
-                            transportP1(P2onboard);
+                            Transport transport = new Transport(2, P2onboard);
+                            transport.run(); 
                         }
                         Position2text.setText("Player 2 Position : "+String.valueOf(P2onboard));
                         turnP2 = false;
@@ -316,13 +359,6 @@ public class App extends Application{
 
     private static void showdice(){
         Image img;
-        // for(int i = 0 ; i<15 ; i++){
-        //     img = new Image("dice"+(int)(Math.random()*6+1)+".png");
-        //     Dice = new ImageView();
-        //     Dice.setImage(img);
-        //     Dice.setFitHeight(90);
-        //     Dice.setFitWidth(90);
-        // }
         img = new Image("dice"+random+".png");
         Dice = new ImageView();
         Dice.setImage(img);
@@ -344,278 +380,4 @@ public class App extends Application{
         else return position;
     }
 
-    private static void animation(Rectangle R , int a, int b){
-        TranslateTransition animate = new TranslateTransition(Duration.millis(1000),R);
-        animate.setToX(a);
-        animate.setToY(b);
-        animate.setAutoReverse(false);
-        animate.play();
-    }
-
-    private static void P1move(Rectangle P1){
-        for(int i = 0; i<random ; i++){
-            if(P1pos%2==0){
-                P1posX += 60;
-            }
-            if(P1pos%2!=0){
-                P1posX -= 60;
-            }
-            if(P1posX >= 600 && P1onboard <100){
-                P1posY -= 60;
-                P1posX -= 60;
-                P1pos++;
-            }
-            if(P1posX <= 0 && P1onboard <100){
-                P1posY-=60;
-                P1posX+=60;
-                P1pos++;
-            }
-            if(P1posX <= 0 && P1posY <=0){
-                P1posX = 30;
-                P1posY = 30;
-                Result.setText("Player 1 has won!");
-                gameb.setText("Start game again!");
-                start = false;
-            }
-            animation(P1, P1posX, P1posY);
-        }
-
-    }
-
-    private static void P2move(Rectangle P2){
-        for(int i = 0 ; i< random ; i++){
-            if(P2pos%2==0){
-                P2posX += 60;
-            }
-            if(P2pos%2!=0){
-                P2posX -= 60;
-            }
-            if(P2posX >= 600 && P2onboard <100){
-                P2posY -= 60;
-                P2posX -= 60;
-                P2pos++;
-            }
-            if(P2posX <= 10 && P2onboard <100){
-                P2posY-=60;
-                P2posX+=60;
-                P2pos++;
-            }
-            if(P2posX <= 60 && P2posY <= 60){
-                P2posX = 30;
-                P2posY = 30;
-                Result.setText("Player 2 has won!");
-                gameb.setText("Start game again!");
-                start = false;
-            }
-            animation(P2,P2posX,P2posY);
-        }
-    }
-
-    private static void transportP1(int k){
-        if(k == 38){
-            P1posX = 140;
-            P1posY = 380;
-            P1pos = 3;
-        }
-        if(k == 14){
-            P1posX = 380;
-            P1posY = 500;
-            P1pos = 1;
-        }
-        if(k == 31){
-            P1posX = 560;
-            P1posY = 380;
-            P1pos = 3;
-        }
-        if(k == 26){
-            P1posX = 320;
-            P1posY = 440;
-            P1pos = 2;
-        }
-        if(k == 42){
-            P1posX = 80;
-            P1posY = 320;
-            P1pos = 4;
-        }
-        if(k == 84){
-            P1posX = 200;
-            P1posY = 80;
-            P1pos = 8;
-        }
-        if(k == 44){
-            P1posX = 200;
-            P1posY = 320;
-            P1pos = 4;
-        }
-        if(k == 67){
-            P1posX = 380;
-            P1posY = 200;
-            P1pos = 6;
-        }
-        if(k == 98){
-            P1posX = 140;
-            P1posY = 20;
-            P1pos = 9;
-        }
-        if(k == 91){
-            P1posX = 580;
-            P1posY = 20;
-            P1pos = 9;
-        }
-        if(k == 94){
-            P1posX = 380;
-            P1posY = 20;
-            P1pos = 9;
-        }
-
-        if(k==6){
-            P1posX = 320;
-            P1posY = 560;
-            P1pos = 0;
-        }
-        if(k==25){
-            P1posX = 260;
-            P1posY = 440;
-            P1pos = 2;
-        }
-        if(k==11){
-            P1posX = 560;
-            P1posY = 500;
-            P1pos = 1;
-        }
-        if(k==60){
-            P1posX = 20;
-            P1posY = 260;
-            P1pos = 6;
-        }
-        if(k==53){
-            P1posX = 440;
-            P1posY = 260;
-            P1pos = 5;
-        }
-        if(k==88){
-            P1posX = 440;
-            P1posY = 260;
-            P1pos = 8;
-        }
-        if(k==75){
-            P1posX = 320;
-            P1posY = 140;
-            P1pos = 7;
-        }
-        if(k==80){
-            P1posX = 20;
-            P1posY = 140;
-            P1pos = 8;
-        }
-        if(k==19){
-            P1posX = 80;
-            P1posY = 500;
-            P1pos = 1;
-        }
-    }
-
-    private static void transportP2(int k){
-        if(k == 38){
-            P2posX = 140;
-            P2posY = 380;
-            P2pos = 3;
-        }
-        if(k == 14){
-            P2posX = 380;
-            P2posY = 500;
-            P2pos = 1;
-        }
-        if(k == 31){
-            P2posX = 560;
-            P2posY = 380;
-            P2pos = 3;
-        }
-        if(k == 26){
-            P2posX = 320;
-            P2posY = 440;
-            P2pos = 2;
-        }
-        if(k == 42){
-            P2posX = 80;
-            P2posY = 320;
-            P2pos = 4;
-        }
-        if(k == 84){
-            P2posX = 200;
-            P2posY = 80;
-            P2pos = 8;
-        }
-        if(k == 44){
-            P2posX = 200;
-            P2posY = 320;
-            P2pos = 4;
-        }
-        if(k == 67){
-            P2posX = 380;
-            P2posY = 200;
-            P2pos = 6;
-        }
-        if(k == 98){
-            P2posX = 140;
-            P2posY = 20;
-            P2pos = 9;
-        }
-        if(k == 91){
-            P2posX = 580;
-            P2posY = 20;
-            P2pos = 9;
-        }
-        if(k == 94){
-            P2posX = 380;
-            P2posY = 20;
-            P2pos = 9;
-        }
-
-        if(k==6){
-            P1posX = 320;
-            P1posY = 560;
-            P1pos = 0;
-        }
-        if(k==25){
-            P1posX = 260;
-            P1posY = 440;
-            P1pos = 2;
-        }
-        if(k==11){
-            P1posX = 560;
-            P1posY = 500;
-            P1pos = 1;
-        }
-        if(k==60){
-            P1posX = 20;
-            P1posY = 260;
-            P1pos = 6;
-        }
-        if(k==53){
-            P1posX = 440;
-            P1posY = 260;
-            P1pos = 5;
-        }
-        if(k==88){
-            P1posX = 440;
-            P1posY = 260;
-            P1pos = 8;
-        }
-        if(k==75){
-            P1posX = 320;
-            P1posY = 140;
-            P1pos = 7;
-        }
-        if(k==80){
-            P1posX = 20;
-            P1posY = 140;
-            P1pos = 8;
-        }
-        if(k==19){
-            P1posX = 80;
-            P1posY = 500;
-            P1pos = 1;
-        }
-    }
 }
