@@ -36,7 +36,7 @@ public class App extends Application{
     private static boolean start = false;
 
     private static int P1posX = 670;
-    public static int P1posY = 60;
+    private static int P1posY = 60;
 
     private static int P2posX = 810;
     private static int P2posY = 60;
@@ -197,7 +197,7 @@ public class App extends Application{
                         }
                     }
                     else if((turnP1 || !turnP2) && P1onboard>=1){
-                        P1onboard = addpostition(P1onboard);
+                        P1onboard = addposition(P1onboard);
                         P1move(P1);
                         Position2text.setText("Player 2 Position : "+String.valueOf(P2onboard));
                         boolean checkLadder = false;
@@ -259,7 +259,7 @@ public class App extends Application{
                         }
                     }
                     else if((turnP2 || !turnP1) && P2onboard>=1){
-                        P2onboard = addpostition(P2onboard);
+                        P2onboard = addposition(P2onboard);
                         P2move(P2);
                         Position2text.setText("Player 2 Position : "+String.valueOf(P2onboard));
                         boolean checkLadder = false;
@@ -337,7 +337,7 @@ public class App extends Application{
         random = (int)(Math.random()*6 + 1);
     }
 
-    private static int addpostition(int position){
+    private static int addposition(int position){
         if(position<=100){
             return position+random;
         }
