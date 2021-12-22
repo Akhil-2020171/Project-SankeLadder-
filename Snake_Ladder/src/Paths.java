@@ -43,6 +43,7 @@ public class Paths {
             move.setPath(ladder1);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 38;
             return p;
         }
@@ -51,6 +52,7 @@ public class Paths {
             move.setPath(ladder2);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 14;
             return p;
         }
@@ -59,6 +61,7 @@ public class Paths {
             move.setPath(ladder3);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 31;
             return p;
         }
@@ -67,6 +70,7 @@ public class Paths {
             move.setPath(ladder4);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 26;
             return p;
         }
@@ -75,6 +79,7 @@ public class Paths {
             move.setPath(ladder5);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 42;
             return p;
         }
@@ -83,6 +88,7 @@ public class Paths {
             move.setPath(ladder6);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 84;
             return p;
         }
@@ -91,6 +97,7 @@ public class Paths {
             move.setPath(ladder7);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 44;
             return p;
         }
@@ -99,6 +106,7 @@ public class Paths {
             move.setPath(ladder8);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 67;
             return p;
         }
@@ -107,6 +115,7 @@ public class Paths {
             move.setPath(ladder9);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 98;
             return p;
         }
@@ -115,6 +124,7 @@ public class Paths {
             move.setPath(ladder10);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 91;
             return p;
         }
@@ -123,6 +133,7 @@ public class Paths {
             move.setPath(ladder11);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 94;
             return p;
         }
@@ -132,6 +143,7 @@ public class Paths {
             move.setPath(Snake1);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 6;
             return p;
         }
@@ -140,6 +152,7 @@ public class Paths {
             move.setPath(Snake2);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 25;
             return p;
         }
@@ -148,6 +161,7 @@ public class Paths {
             move.setPath(Snake3);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 11;
             return p;
         }
@@ -156,6 +170,7 @@ public class Paths {
             move.setPath(Snake4);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 60;
             return p;
         }
@@ -164,6 +179,7 @@ public class Paths {
             move.setPath(Snake5);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 19;
             return p;
         }
@@ -172,6 +188,7 @@ public class Paths {
             move.setPath(Snake6);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 53;
             return p;
         }
@@ -180,6 +197,7 @@ public class Paths {
             move.setPath(Snake7);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 88;
             return p;
         }
@@ -188,6 +206,7 @@ public class Paths {
             move.setPath(Snake8);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 75;
             return p;
         }
@@ -196,6 +215,7 @@ public class Paths {
             move.setPath(Snake9);
             move.setAutoReverse(false);
             move.play();
+            move.setAutoReverse(false);
             p = 80;
             return p;
         }

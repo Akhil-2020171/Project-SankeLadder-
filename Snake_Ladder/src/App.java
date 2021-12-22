@@ -21,7 +21,6 @@ public class App extends Application{
     private static final int snake[]  = {16,46,49,64,74,92,95,99,62};
 
     public static Group tileG = new Group();
-    // private static Stage secondarystage;
 
     public static int random;
     public static Button gameb;
@@ -33,7 +32,6 @@ public class App extends Application{
     private static boolean turnP1 = false;
     private static boolean turnP2 = false;
     public static boolean start = false;
-    // public static boolean win = false;
 
     public static int P1posX = 670;
     public static int P1posY = 60;
@@ -57,44 +55,7 @@ public class App extends Application{
         primarystage.setTitle("Snake and Ladder");
         primarystage.setScene(scene);
         primarystage.show();
-
-        // if(win){
-        //     Scene scene2 = new Scene(End());
-        //     secondarystage.setTitle("Victory");
-        //     secondarystage.setScene(scene2);
-        //     secondarystage.show();
-        // }
-    }
-
-    // private static Parent End(){
-    //     Pane root = new Pane();
-    //     root.setPrefSize(300,300);
-        
-    //     if(P1onboard==100){
-    //         Label label = new Label("Player 1 won!!");
-    //         label.setTranslateX(100);
-    //         label.setTranslateY(150);
-    //         root.getChildren().add(label);
-    //     }
-    //     if(P2onboard==100){
-    //         Label label = new Label("Player 2 won!!");
-    //         label.setTranslateX(100);
-    //         label.setTranslateY(150);
-    //         root.getChildren().add(label);
-    //     }
-
-    //     return root;
-    // }
-
-    // public static boolean checkWin(){
-    //     if(P1onboard==100){
-    //         return true;
-    //     }
-    //     if(P2onboard==100){
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    }    
 
     private static Parent Game(){
         Pane root = new Pane();
@@ -233,37 +194,23 @@ public class App extends Application{
                             Position1text.setText("Player 1 Position : "+String.valueOf(P1onboard));
                         }
                     }
-                    else if((turnP1 || !turnP2) && P1onboard>=1){
-                        P1onboard = addposition(P1onboard);
-                        Move move = new Move(P1,1);
-                        move.run();
-                        Position2text.setText("Player 2 Position : "+String.valueOf(P2onboard));
-                        boolean checkLadder = false;
-                        boolean checkSnake = false;
-                        for(int i = 0 ; i<11 ; i++){
-                            if(ladder[i] == P1onboard){
-                                checkLadder = true;
-                                break;
+                    else if(P1onboard>=1){
+                        if(P1onboard>=94 && P1onboard<=100){
+                            int difference = 100-P1onboard;
+                            if(random<=difference){
+                                P1onboard = addposition(P1onboard);
+                                Move move = new Move(P1,1);
+                                move.run();
+                                Position1text.setText("Player 1 Position : "+String.valueOf(P1onboard));
+                                P1run(P1);
                             }
                         }
-                        if(checkLadder){
-                            Paths pm = new Paths(P1);
-                            P1onboard =  pm.move(P1onboard);
-                            Transport transport = new Transport(1, P1onboard);
-                            transport.run();
-                        }
-    
-                        for(int i = 0 ; i<9 ; i++){
-                            if(snake[i] == P1onboard){
-                                checkSnake = true;
-                                break;
-                            }
-                        }
-                        if(checkSnake){
-                            Paths pm = new Paths(P1);
-                            P1onboard = pm.move(P1onboard);
-                            Transport transport = new Transport(1, P1onboard);
-                            transport.run();
+                        else{
+                            P1onboard = addposition(P1onboard);
+                            Move move = new Move(P1,1);
+                            move.run();
+                            Position1text.setText("Player 1 Position : "+String.valueOf(P1onboard));
+                            P1run(P1);
                         }
                         Position1text.setText("Player 1 Position : "+String.valueOf(P1onboard));
                         turnP1 = false;
@@ -298,37 +245,23 @@ public class App extends Application{
                             Position2text.setText("Player 2 Position : "+String.valueOf(P2onboard));
                         }
                     }
-                    else if((turnP2 || !turnP1) && P2onboard>=1){
-                        P2onboard = addposition(P2onboard);
-                        Move move = new Move(P2, 2);
-                        move.run();
-                        Position2text.setText("Player 2 Position : "+String.valueOf(P2onboard));
-                        boolean checkLadder = false;
-                        boolean checkSnake = false;
-                        for(int i = 0 ; i<11 ; i++){
-                            if(ladder[i] == P2onboard){
-                                checkLadder = true;
-                                break;
+                    else if(P2onboard>=1){
+                        if(P2onboard>=94 && P2onboard<=100){
+                            int difference = 100 - P2onboard;
+                            if(random<=difference){
+                                P2onboard = addposition(P2onboard);
+                                Move move = new Move(P2, 2);
+                                move.run();
+                                Position2text.setText("Player 2 Position : "+String.valueOf(P2onboard));
+                                P2run(P2);
                             }
                         }
-                        if(checkLadder){
-                            Paths pm = new Paths(P2);
-                            P2onboard =  pm.move(P2onboard);
-                            Transport transport = new Transport(2, P2onboard);
-                            transport.run(); 
-                        }
-    
-                        for(int i = 0 ; i<9 ; i++){
-                            if(snake[i] == P2onboard){
-                                checkSnake = true;
-                                break;
-                            }
-                        }
-                        if(checkSnake){
-                            Paths pm = new Paths(P2);
-                            P2onboard = pm.move(P2onboard);
-                            Transport transport = new Transport(2, P2onboard);
-                            transport.run(); 
+                        else{
+                            P2onboard = addposition(P2onboard);
+                            Move move = new Move(P2, 2);
+                            move.run();
+                            Position2text.setText("Player 2 Position : "+String.valueOf(P2onboard));
+                            P2run(P2);
                         }
                         Position2text.setText("Player 2 Position : "+String.valueOf(P2onboard));
                         turnP2 = false;
@@ -380,4 +313,63 @@ public class App extends Application{
         else return position;
     }
 
+    private static void P1run(Rectangle P1){
+        boolean checkLadder = false;
+        boolean checkSnake = false;
+        for(int i = 0 ; i<11 ; i++){
+            if(ladder[i] == P1onboard){
+                checkLadder = true;
+                break;
+            }
+        }
+        if(checkLadder){
+            Paths pm = new Paths(P1);
+            P1onboard =  pm.move(P1onboard);
+            Transport transport = new Transport(1, P1onboard);
+            transport.run();
+        }
+
+        for(int i = 0 ; i<9 ; i++){
+            if(snake[i] == P1onboard){
+                checkSnake = true;
+                break;
+            }
+        }
+        if(checkSnake){
+            Paths pm = new Paths(P1);
+            P1onboard = pm.move(P1onboard);
+            Transport transport = new Transport(1, P1onboard);
+            transport.run();
+        }
+    }
+
+    private static void P2run(Rectangle P2){
+        boolean checkLadder = false;
+        boolean checkSnake = false;
+        for(int i = 0 ; i<11 ; i++){
+            if(ladder[i] == P2onboard){
+                checkLadder = true;
+                break;
+            }
+        }
+        if(checkLadder){
+            Paths pm = new Paths(P2);
+            P2onboard =  pm.move(P2onboard);
+            Transport transport = new Transport(2, P2onboard);
+            transport.run(); 
+        }
+
+        for(int i = 0 ; i<9 ; i++){
+            if(snake[i] == P2onboard){
+                checkSnake = true;
+                break;
+            }
+        }
+        if(checkSnake){
+            Paths pm = new Paths(P2);
+            P2onboard = pm.move(P2onboard);
+            Transport transport = new Transport(2, P2onboard);
+            transport.run(); 
+        }
+    }
 }

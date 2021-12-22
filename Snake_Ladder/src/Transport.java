@@ -12,7 +12,7 @@ public class Transport implements Runnable{
         if(p==1){
             transportP1(boardvalue);
         }
-        if(p==2){
+        else if(p==2){
             transportP2(boardvalue);
         }
     }
@@ -92,7 +92,7 @@ public class Transport implements Runnable{
         if(k==60){
             App.P1posX = 20;
             App.P1posY = 260;
-            App.P1pos = 6;
+            App.P1pos = 5;
         }
         if(k==53){
             App.P1posX = 440;
@@ -101,7 +101,7 @@ public class Transport implements Runnable{
         }
         if(k==88){
             App.P1posX = 440;
-            App.P1posY = 260;
+            App.P1posY = 90;
             App.P1pos = 8;
         }
         if(k==75){
@@ -112,7 +112,7 @@ public class Transport implements Runnable{
         if(k==80){
             App.P1posX = 20;
             App.P1posY = 140;
-            App.P1pos = 8;
+            App.P1pos = 7;
         }
         if(k==19){
             App.P1posX = 80;
@@ -179,49 +179,49 @@ public class Transport implements Runnable{
         }
 
         if(k==6){
-            App.P1posX = 320;
-            App.P1posY = 560;
-            App.P1pos = 0;
+            App.P2posX = 320;
+            App.P2posY = 560;
+            App.P2pos = 0;
         }
         if(k==25){
-            App.P1posX = 260;
-            App.P1posY = 440;
-            App.P1pos = 2;
+            App.P2posX = 260;
+            App.P2posY = 440;
+            App.P2pos = 2;
         }
         if(k==11){
-            App.P1posX = 560;
-            App.P1posY = 500;
-            App.P1pos = 1;
+            App.P2posX = 560;
+            App.P2posY = 500;
+            App.P2pos = 1;
         }
         if(k==60){
-            App.P1posX = 20;
-            App.P1posY = 260;
-            App.P1pos = 6;
+            App.P2posX = 20;
+            App.P2posY = 260;
+            App.P2pos = 5;
         }
         if(k==53){
-            App.P1posX = 440;
-            App.P1posY = 260;
-            App.P1pos = 5;
+            App.P2posX = 440;
+            App.P2posY = 260;
+            App.P2pos = 5;
         }
         if(k==88){
-            App.P1posX = 440;
-            App.P1posY = 260;
-            App.P1pos = 8;
+            App.P2posX = 440;
+            App.P2posY = 90;
+            App.P2pos = 8;
         }
         if(k==75){
-            App.P1posX = 320;
-            App.P1posY = 140;
-            App.P1pos = 7;
+            App.P2posX = 320;
+            App.P2posY = 140;
+            App.P2pos = 7;
         }
         if(k==80){
-            App.P1posX = 20;
-            App.P1posY = 140;
-            App.P1pos = 8;
+            App.P2posX = 20;
+            App.P2posY = 140;
+            App.P2pos = 7;
         }
         if(k==19){
-            App.P1posX = 80;
-            App.P1posY = 500;
-            App.P1pos = 1;
+            App.P2posX = 80;
+            App.P2posY = 500;
+            App.P2pos = 1;
         }
     }
 }

@@ -49,7 +49,6 @@ public class Move implements Runnable{
                 App.arrow2.setVisible(false);
             }
             animation(P, App.P1posX, App.P1posY);
-            // App.win = App.checkWin();
         }
 
     }
@@ -81,7 +80,6 @@ public class Move implements Runnable{
                 App.arrow2.setVisible(false);
             }
             animation(P,App.P2posX,App.P2posY);
-            // App.win = App.checkWin();
         }
     }
 
@@ -91,6 +89,7 @@ public class Move implements Runnable{
         animate.setToY(b);
         animate.setAutoReverse(false);
         animate.play();
+        animate.setAutoReverse(false);
     }
     
 }
